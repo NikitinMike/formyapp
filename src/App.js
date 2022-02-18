@@ -4,6 +4,7 @@ import React from "react";
 function handleChange(event) {
     // this.setState({value: event.target.value});
     console.log(event.target.name,':',event.target.value)
+    this.setState({[event.target.name]: event.target.value});
     fetch('http://localhost:3000/contacts/'+1,{method: 'PUT'})
         .then(response => response.json())
         .then(data => console.log(data))
@@ -42,10 +43,10 @@ const Form = ({row}) =>
     <form onSubmit={handleSubmit}>
 
         {/*<label>Имя:</label>*/}
-        {/*<input type="text" name="name" />*/}
+        {/*<input name={"name"} />*/}
 
         <Data col={'id'} data={row.id}/>
-        <Data col={'firstName'} data={row.firstName}/>
+        <Data col={'firstName'} data={row['firstName']}/>
         <Data col={'lastName'} data={row.lastName}/>
         <Data col={'email'} data={row.email}/>
         <Data col={'phone'} data={row.phone}/>
