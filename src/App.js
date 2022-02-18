@@ -2,15 +2,22 @@ import './App.css';
 import React from "react";
 
 function handleChange(event) {
-    this.setState({value: event.target.value});
+    // this.setState({value: event.target.value});
+    console.log(event.target.name,':',event.target.value)
+    fetch('http://localhost:3000/contacts/'+1,{method: 'PUT'})
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(e => console.log(e))
 }
 
 const Data = ({col, data}) =>
-    <div className="field">
-        <label htmlFor={col}>{col}</label>
-        <input value={data} id={col}  onChange={handleChange}/>
+    // <div className={col}>
+    <label htmlFor={col}>{col}&nbsp;
+        <input name={col} id={col} value={data} onChange={handleChange} />
                {/*onChange={(e)=>editRow(e,col)}/>*/}
-    </div>
+        <br/>
+    </label>
+    // </div>
 
 function editRow(e, col) {
     console.log(col)
@@ -33,6 +40,10 @@ function handleSubmit() {
 
 const Form = ({row}) =>
     <form onSubmit={handleSubmit}>
+
+        {/*<label>Имя:</label>*/}
+        {/*<input type="text" name="name" />*/}
+
         <Data col={'id'} data={row.id}/>
         <Data col={'firstName'} data={row.firstName}/>
         <Data col={'lastName'} data={row.lastName}/>
@@ -41,7 +52,8 @@ const Form = ({row}) =>
         <Data col={'city'} data={row.city}/>
         <Data col={'country'} data={row.country}/>
         <br/>
-        <center><button>Submit</button></center>
+        <input type="submit" value="Отправить" />
+        {/*<center><button>Submit</button></center>*/}
     </form>
 
 class App extends React.Component {
