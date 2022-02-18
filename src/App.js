@@ -37,7 +37,7 @@ class Form extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = this.props.row;
+    this.state = {row:this.props.row};
     console.log(this.state);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -65,8 +65,21 @@ class Form extends React.Component {
 
   handleSubmit() {
     // function handleSubmit() {
-    console.log("SUBMIT", this.state)
-    // }
+    // const data = JSON.stringify(this.state.row)
+    const row = this.state.row
+    console.log("DATA:", row)
+    // console.log("SUBMIT", this.state)
+
+    // const formData = new FormData();
+    // formData.append('firstname', data.firstName);
+    // formData.append('lastname', data.lastName);
+    // formData.append('email', data.email);
+
+    fetch('http://localhost:3000/contacts/'+32, {method: 'PUT',
+      body: row})
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(e => console.log(e))
   }
 
 }
