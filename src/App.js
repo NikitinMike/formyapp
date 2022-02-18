@@ -3,21 +3,26 @@ import React from "react";
 
 class Data extends React.Component {
 
+  handleChange(event) {
+    // console.log(event.target.name, ':', event.target.value)
+    this.setState({val: event.target.value})
+    // console.log(this.state)
+  }
+
   constructor(props) {
     super(props);
     this.state = {col: this.props.col, val: this.props.val};
+    this.handleChange = this.handleChange.bind(this);
     // console.log(this.state);
   }
 
   render(props) {
     const col = this.state.col
-    const val = this.state.val
-    // console.log(col, ':', data)
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <label htmlFor={col}>{col}&nbsp;
         <input name={col} id={col}
-               value={val}
+               value={this.state.val}
                onChange={this.handleChange}
         />
         {/*onChange={(e)=>editRow(e,col)}/>*/}
@@ -26,19 +31,6 @@ class Data extends React.Component {
     )
   }
 
-  handleChange(event) {
-    // const data = this.state.data
-    // this.setState({value: event.target.value});
-    console.log(event.target.name, ':', event.target.value)
-    // const value = event.target.value
-    // console.log(this.state)
-    this.setState({val: event.target.value})
-    // this.setState({[event.target.name]: event.target.value});
-    // fetch('http://localhost:3000/contacts/' + 1, {method: 'PUT'})
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
-    //     .catch(e => console.log(e))
-  }
 }
 
 class Form extends React.Component {
@@ -47,6 +39,7 @@ class Form extends React.Component {
     super(props);
     this.state = this.props.row;
     console.log(this.state);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   dataInput(col) {
@@ -57,8 +50,6 @@ class Form extends React.Component {
   render(props) {
     return (
       <form onSubmit={this.handleSubmit}>
-        {/*<label>Имя:</label>*/}
-        {/*<input name={"name"} />*/}
         {this.dataInput('id')}
         {this.dataInput('firstName')}
         {this.dataInput('lastName')}
@@ -67,8 +58,7 @@ class Form extends React.Component {
         {this.dataInput('city')}
         {this.dataInput('country')}
         <br/>
-        <input type="submit" value="Отправить"/>
-        {/*<center><button>Submit</button></center>*/}
+        <center><input type="submit" value="Отправить"/></center>
       </form>
     )
   }
