@@ -35,11 +35,11 @@ class Form extends React.Component {
                 {/*<input name={"name"} />*/}
                 <Data col={'id'} data={row.id}/>
                 <Data col={'firstName'} data={row['firstName']}/>
-                <Data col={'lastName'} data={row.lastName}/>
-                <Data col={'email'} data={row.email}/>
-                <Data col={'phone'} data={row.phone}/>
-                <Data col={'city'} data={row.city}/>
-                <Data col={'country'} data={row.country}/>
+                <Data col={'lastName'} data={row['lastName']}/>
+                <Data col={'email'} data={row['email']}/>
+                <Data col={'phone'} data={row['phone']}/>
+                <Data col={'city'} data={row['city']}/>
+                <Data col={'country'} data={row['country']}/>
                 <br/>
                 <input type="submit" value="Отправить"/>
                 {/*<center><button>Submit</button></center>*/}
