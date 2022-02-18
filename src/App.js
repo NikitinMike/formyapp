@@ -3,14 +3,14 @@ import React from "react";
 
 class Data extends React.Component {
     render(props) {
-        const col=this.props.col
+        const col = this.props.col
         // const data=this.props.data
-        const row=this.props.row
+        const row = this.props.row
         // console.log(col,':',row)
         const val = row[col]
         return (
             <label htmlFor={col}>{col}&nbsp;
-                <input name={col} id={col} value={val} onChange={this.handleChange} />
+                <input name={col} id={col} value={val} onChange={this.handleChange}/>
                 {/*onChange={(e)=>editRow(e,col)}/>*/}
                 <br/>
             </label>
@@ -19,9 +19,9 @@ class Data extends React.Component {
 
     handleChange(event) {
         // this.setState({value: event.target.value});
-        console.log(event.target.name,':',event.target.value)
+        console.log(event.target.name, ':', event.target.value)
         this.setState({[event.target.name]: event.target.value});
-        fetch('http://localhost:3000/contacts/'+1,{method: 'PUT'})
+        fetch('http://localhost:3000/contacts/' + 1, {method: 'PUT'})
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(e => console.log(e))
@@ -30,7 +30,7 @@ class Data extends React.Component {
 
 class Form extends React.Component {
     render(props) {
-        console.log(this.props.row);
+        // console.log(this.props.row);
         const row = this.props.row
         return (
             <form onSubmit={this.handleSubmit}>
@@ -52,7 +52,7 @@ class Form extends React.Component {
 
     handleSubmit() {
         // function handleSubmit() {
-            console.log("SUBMIT", this.state.value)
+        console.log("SUBMIT", this.state.value)
         // }
     }
 
@@ -70,9 +70,9 @@ class App extends React.Component {
     render() {
         const row = this.state.rows[0]
         // console.log(this.state.rows)
-        if(this.state.isLoaded)
-            return (<div className="Contacts"><Form row={row}/></div>)
-        else return  (<div className="Contacts"> </div>)
+        return (<div className="Contacts">
+            {this.state.isLoaded ? <Form row={row}/> : null}
+        </div>)
     }
 
     componentDidMount() {
