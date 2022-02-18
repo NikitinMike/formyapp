@@ -2,15 +2,24 @@ import './App.css';
 import React from "react";
 
 class Data extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {col: this.props.col, val: this.props.val};
+    // console.log(this.state);
+  }
+
   render(props) {
-    const col = this.props.col
-    // const data=this.props.data
-    const row = this.props.row
-    // console.log(col,':',row)
-    const val = row[col]
+    const col = this.state.col
+    const val = this.state.val
+    // console.log(col, ':', data)
+    console.log(this.state);
     return (
       <label htmlFor={col}>{col}&nbsp;
-        <input name={col} id={col} value={val} onChange={this.handleChange}/>
+        <input name={col} id={col}
+               value={val}
+               onChange={this.handleChange}
+        />
         {/*onChange={(e)=>editRow(e,col)}/>*/}
         <br/>
       </label>
@@ -18,8 +27,12 @@ class Data extends React.Component {
   }
 
   handleChange(event) {
+    // const data = this.state.data
     // this.setState({value: event.target.value});
     console.log(event.target.name, ':', event.target.value)
+    // const value = event.target.value
+    // console.log(this.state)
+    this.setState({val: event.target.value})
     // this.setState({[event.target.name]: event.target.value});
     // fetch('http://localhost:3000/contacts/' + 1, {method: 'PUT'})
     //     .then(response => response.json())
@@ -36,19 +49,23 @@ class Form extends React.Component {
     console.log(this.state);
   }
 
-  render(props) {
+  dataInput(col) {
     const row = this.props.row
+    return (<Data col={col} val={row[col]}/>)
+  }
+
+  render(props) {
     return (
       <form onSubmit={this.handleSubmit}>
         {/*<label>Имя:</label>*/}
         {/*<input name={"name"} />*/}
-        <Data col={'id'} data={row['id']} row={row}/>
-        <Data col={'firstName'} data={row['firstName']} row={row}/>
-        <Data col={'lastName'} data={row['lastName']} row={row}/>
-        <Data col={'email'} data={row['email']} row={row}/>
-        <Data col={'phone'} data={row['phone']} row={row}/>
-        <Data col={'city'} data={row['city']} row={row}/>
-        <Data col={'country'} data={row['country']} row={row}/>
+        {this.dataInput('id')}
+        {this.dataInput('firstName')}
+        {this.dataInput('lastName')}
+        {this.dataInput('email')}
+        {this.dataInput('phone')}
+        {this.dataInput('city')}
+        {this.dataInput('country')}
         <br/>
         <input type="submit" value="Отправить"/>
         {/*<center><button>Submit</button></center>*/}
