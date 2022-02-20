@@ -38,17 +38,21 @@ class Form extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {row: this.props.row};
+    console.log('FORM DATA:',this.props.row);
+    this.state = {row: this.props.row, index: this.props.index};
     this.handleSubmit = this.handleSubmit.bind(this);
-    // console.log('FORM DATA:',this.state);
+    console.log('FORM DATA:',this.state);
   }
 
   inputColumn(col) {
     const row = this.state.row // s[this.state.index]
+    // console.log('DATA:',row[col]);
     return (<Data col={col} val={row[col]} row={row}/>)
   }
 
   render(props) {
+    console.log('DATA:',this.props.row);
+    console.log('DATA:',this.state.row);
     return (
       <form onSubmit={this.handleSubmit}>
         {this.inputColumn('id')}
@@ -86,45 +90,56 @@ class Form extends React.Component {
 }
 
 class Page extends React.Component {
-  index=0;
-  row=null;
-  rows=null;
+  index = 0;
+  row = null;
+  rows = null;
 
   moveNext() {
     this.index = this.state.index + 1
     this.row = this.rows[this.index]
-    this.setState({index: this.index,row:this.row})
-    console.log(this.state)
+    this.setState({index: this.index, row: this.row})
+    // console.log(this.state)
   }
 
   moveBack() {
     this.index = this.state.index - 1
     this.row = this.rows[this.index]
-    this.setState({index: this.index,row:this.row })
-    console.log(this.state)
+    this.setState({index: this.index, row: this.row})
+    // console.log(this.state)
   }
 
   constructor(props) {
     super(props);
     this.moveNext = this.moveNext.bind(this);
     this.moveBack = this.moveBack.bind(this);
-    this.rows= this.props.rows
-    this.state = { index: this.index, row:this.props.rows[this.index]};
-    console.log(this.state)
+    this.rows = this.props.rows
+    this.state = {index: this.index, row: this.rows[this.index]};
+    console.log('PAGE:', this.state)
   }
 
   render() {
+    // console.log(this.state.row)
     return (
       <div>
-        <Form row={this.state.row}/>
+        <Index index={this.state.index} row={this.state.row}/>
+        <Form row={this.state.row} index={this.state.index}/>
         <br/>
         <center>
           <input type="button" value="back" onClick={this.moveBack}/>
-          <label> -------------------- </label>
+          <Index index={this.state.index}/>
           <input type="button" value="forward" onClick={this.moveNext}/>
         </center>
       </div>
     );
+  }
+}
+
+class Index extends React.Component {
+  render(props) {
+    console.log(this.props.row)
+    return (
+      <label> - {this.props.index} - </label>
+    )
   }
 }
 
