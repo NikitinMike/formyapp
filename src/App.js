@@ -5,13 +5,14 @@ class Data extends React.Component {
 
   async handleChange(event) {
     // console.log(event.target.name, ':', event.target.value)
-    await this.setState({col: event.target.name, val: event.target.value})
-    console.log(this.state)
+    await this.setState({val: event.target.value})
+    this.state.row[this.state.col] = event.target.value
+    // console.log(this.state)
   }
 
   constructor(props) {
     super(props);
-    this.state = {col: this.props.col, val: this.props.val};
+    this.state = {col: this.props.col, val: this.props.val, row: this.props.row};
     this.handleChange = this.handleChange.bind(this);
     // console.log(this.state);
   }
@@ -43,7 +44,7 @@ class Form extends React.Component {
   }
 
   inputColumn(col) {
-    return (<Data col={col} val={this.props.row[col]}/>)
+    return (<Data col={col} val={this.state.row[col]} row={this.state.row}/>)
   }
 
   render(props) {
@@ -63,8 +64,9 @@ class Form extends React.Component {
 
   handleSubmit() {
     const row = this.state.row
+    const id = row.id
     console.log("SUBMIT DATA:", row)
-    fetch('http://localhost:3000/contacts/' + 36, {
+    fetch('http://localhost:3000/contacts/' + id, {
       body: JSON.stringify(row),
       method: 'PUT',
       headers: {
