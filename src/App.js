@@ -62,11 +62,11 @@ class Form extends React.Component {
     )
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     const row = this.state.row
     const id = row.id
     console.log("SUBMIT DATA:", row)
-    fetch('http://localhost:3000/contacts/' + id, {
+    await fetch('http://localhost:3000/contacts/' + id, {
       body: JSON.stringify(row),
       method: 'PUT',
       headers: {
