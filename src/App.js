@@ -86,18 +86,21 @@ class Form extends React.Component {
 }
 
 class Page extends React.Component {
+  index=0;
+  row=null;
+  rows=null;
 
   moveNext() {
-    const index = this.state.index + 1
-    const row = this.state.rows[index]
-    this.setState({index: index,row:row})
+    this.index = this.state.index + 1
+    this.row = this.rows[this.index]
+    this.setState({index: this.index,row:this.row})
     console.log(this.state)
   }
 
   moveBack() {
-    const index = this.state.index - 1
-    const row = this.state.rows[index]
-    this.setState({index: index,row:row })
+    this.index = this.state.index - 1
+    this.row = this.rows[this.index]
+    this.setState({index: this.index,row:this.row })
     console.log(this.state)
   }
 
@@ -105,7 +108,8 @@ class Page extends React.Component {
     super(props);
     this.moveNext = this.moveNext.bind(this);
     this.moveBack = this.moveBack.bind(this);
-    this.state = {rows: this.props.rows, index: 0, row:this.props.rows[0]};
+    this.rows= this.props.rows
+    this.state = { index: this.index, row:this.props.rows[this.index]};
     console.log(this.state)
   }
 
