@@ -16,11 +16,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.getData();
-        // console.log(this.state.rows)
-    }
-
-    getData() {
         fetch('http://localhost:3000/contacts')
             .then(response => response.json())
             .then(data => this.setState({rows: data, isLoaded: true}))
