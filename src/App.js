@@ -36,6 +36,8 @@ class Data extends React.Component {
 
 class Form extends React.Component {
 
+    row = null
+
     constructor(props) {
         super(props);
         // console.log('FORM DATA props:', this.props.row);
@@ -45,22 +47,23 @@ class Form extends React.Component {
     }
 
     inputColumn(col) {
-        const row = this.state.row // s[this.state.index]
+        // const row = this.state.row // s[this.state.index]
         // console.log('DATA:',col,row[col]);
-        return (<Data col={col} val={row[col]} row={row}/>)
+        // if(row)
+        return (<Data col={col} val={(this.row)[col]} row={this.row}/>)
     }
 
     render() {
         // console.log('DATA state:', this.state.row);
         // console.log('DATA props:', this.props.row);
-        const row = this.props.row // s[this.state.index]
-        console.log('DATA row:', row);
+        this.row = this.state.row // s[this.state.index]
+        console.log('DATA row:', this.row);
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.inputColumn('id')}
-                <div align='right'><label> {row.id} </label><br/></div>
+                <div align='right'><label> {this.row.id} </label><br/></div>
                 {this.inputColumn('firstName')}
-                <div align='right'><label> {row['firstName']} </label><br/></div>
+                <div align='right'><label> {(this.row)['firstName']} </label><br/></div>
                 {this.inputColumn('lastName')}
                 {this.inputColumn('email')}
                 {this.inputColumn('phone')}
@@ -98,12 +101,39 @@ class Page extends React.Component {
     row = null;
     rows = null;
 
+    constructor(props) {
+        super(props);
+        this.rows = this.props.rows
+        this.state = {index: this.index, row: this.rows[this.index]};
+        this.moveNext = this.moveNext.bind(this);
+        this.moveBack = this.moveBack.bind(this);
+        // console.log('PAGE:', this.state)
+    }
+
+    render() {
+        // console.log(this.state.row)
+        return (
+            <div>
+                <div align='right'>
+                    <Index index={this.state.index} row={this.state.row}/>
+                </div>
+                <Form row={this.state.row} index={this.state.index}/>
+                <br/>
+                <center>
+                    <button onClick={this.moveBack}>back</button>
+                    <Index index={this.state.index}/>
+                    <button onClick={this.moveNext}>forward</button>
+                </center>
+            </div>
+        );
+    }
+
     moveNext() {
         if (this.rows[this.index + 1]) {
             this.index = this.state.index + 1
             this.row = this.rows[this.index]
             this.setState({index: this.index, row: this.row})
-            // console.log(this.state)
+            console.log(this.state)
         }
     }
 
@@ -112,34 +142,10 @@ class Page extends React.Component {
             this.index = this.state.index - 1
             this.row = this.rows[this.index]
             this.setState({index: this.index, row: this.row})
-            // console.log(this.state)
+            console.log(this.state)
         }
     }
 
-    constructor(props) {
-        super(props);
-        this.moveNext = this.moveNext.bind(this);
-        this.moveBack = this.moveBack.bind(this);
-        this.rows = this.props.rows
-        this.state = {index: this.index, row: this.rows[this.index]};
-        // console.log('PAGE:', this.state)
-    }
-
-    render() {
-        // console.log(this.state.row)
-        return (
-            <div>
-                <Index index={this.state.index} row={this.state.row}/>
-                <Form row={this.state.row} index={this.state.index}/>
-                <br/>
-                <center>
-                    <input type="button" value="back" onClick={this.moveBack}/>
-                    <Index index={this.state.index}/>
-                    <input type="button" value="forward" onClick={this.moveNext}/>
-                </center>
-            </div>
-        );
-    }
 }
 
 class Index extends React.Component {
