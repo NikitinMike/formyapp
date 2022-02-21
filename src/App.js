@@ -18,12 +18,12 @@ class Data extends React.Component {
     }
 
     render(props) {
+        // console.log(this.props);
         const col = this.state.col
-        // console.log(this.state);
         return (
             <label htmlFor={col}>{col}&nbsp;
                 <input name={col} id={col}
-                       value={this.state.val}
+                       value={this.props.val}
                        onChange={this.handleChange}
                 />
                 {/*onChange={(e)=>editRow(e,col)}/>*/}
@@ -48,9 +48,10 @@ class Form extends React.Component {
 
     inputColumn(col) {
         // const row = this.state.row // s[this.state.index]
-        // console.log('DATA:',col,row[col]);
+        const data = this.row[col]? this.row[col]:''
+        // console.log('DATA:',col,data);
         // if(row)
-        return (<Data col={col} val={(this.row)[col]} row={this.row}/>)
+        return (<Data col={col} val={data} row={this.row}/>)
     }
 
     render() {
@@ -61,9 +62,9 @@ class Form extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.inputColumn('id')}
-                <div align='right'><label> {this.row.id} </label><br/></div>
+                {/*<div align='right'><label> {this.row.id} </label><br/></div>*/}
                 {this.inputColumn('firstName')}
-                <div align='right'><label> {(this.row)['firstName']} </label><br/></div>
+                {/*<div align='right'><label> {(this.row)['firstName']} </label><br/></div>*/}
                 {this.inputColumn('lastName')}
                 {this.inputColumn('email')}
                 {this.inputColumn('phone')}
