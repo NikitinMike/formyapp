@@ -56,8 +56,8 @@ class Form extends React.Component {
     render() {
         // console.log('DATA state:', this.state.row);
         // console.log('DATA props:', this.props.row);
-        this.row = this.state.row // s[this.state.index]
-        console.log('DATA row:', this.row);
+        this.row = this.props.row // s[this.state.index]
+        // console.log('DATA row:', this.row);
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.inputColumn('id')}
@@ -104,10 +104,11 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.rows = this.props.rows
-        this.state = {index: this.index, row: this.rows[this.index]};
+        this.row = this.rows[this.index]
+        this.state = {index: this.index, row: this.row};
         this.moveNext = this.moveNext.bind(this);
         this.moveBack = this.moveBack.bind(this);
-        // console.log('PAGE:', this.state)
+        console.log('PAGE:', this.state)
     }
 
     render() {
@@ -121,7 +122,7 @@ class Page extends React.Component {
                 <br/>
                 <center>
                     <button onClick={this.moveBack}>back</button>
-                    <Index index={this.state.index}/>
+                    <Index index={this.state.index} row={this.state.row}/>
                     <button onClick={this.moveNext}>forward</button>
                 </center>
             </div>
@@ -133,7 +134,7 @@ class Page extends React.Component {
             this.index = this.state.index + 1
             this.row = this.rows[this.index]
             this.setState({index: this.index, row: this.row})
-            console.log(this.state)
+            // console.log(this.state)
         }
     }
 
@@ -142,14 +143,14 @@ class Page extends React.Component {
             this.index = this.state.index - 1
             this.row = this.rows[this.index]
             this.setState({index: this.index, row: this.row})
-            console.log(this.state)
+            // console.log(this.state)
         }
     }
 
 }
 
 class Index extends React.Component {
-    render(props) {
+    render() {
         // console.log(this.props.row)
         return (<label> - {this.props.index} - </label>)
     }
