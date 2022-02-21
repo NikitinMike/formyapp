@@ -21,12 +21,8 @@ class Data extends React.Component {
         // console.log(this.props);
         const col = this.state.col
         return (
-            <label htmlFor={col}>{col}&nbsp;
-                <input name={col} id={col}
-                       value={this.props.val}
-                       onChange={this.handleChange}
-                />
-                {/*onChange={(e)=>editRow(e,col)}/>*/}
+            <label htmlFor={col}>{col}&nbsp;&nbsp;
+                <input name={col} id={col} value={this.props.val} onChange={this.handleChange}/>
                 <br/>
             </label>
         )
