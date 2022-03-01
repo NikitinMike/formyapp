@@ -9,17 +9,26 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         // console.log('FORM DATA props:', this.props.row);
-        this.state = {row: this.props.row, index: this.props.index};
+        this.row=this.props.row
+        this.state = {row: this.row, index: this.props.index};
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.dataChange = this.dataChange.bind(this);
         // console.log('FORM DATA state:', this.state);
+    }
+
+    dataChange(event) {
+        // console.log(event.target.name, ':', event.target.value)
+        // console.log(this.state)
+        this.row = this.state.row
+        this.row[event.target.name] = event.target.value
+        this.setState({row: this.row})
     }
 
     inputColumn(col) {
         // const row = this.state.row // s[this.state.index]
-        const data = this.row[col]? this.row[col]:''
         // console.log('DATA:',col,data);
         // if(row)
-        return (<Data col={col} val={data} row={this.row}/>)
+        return (<Data col={col} val={this.row[col]? this.row[col]:''} dataChange={this.dataChange}/>)
     }
 
     render() {

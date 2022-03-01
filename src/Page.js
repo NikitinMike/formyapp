@@ -14,7 +14,7 @@ class Page extends React.Component {
         this.state = {index: this.index, row: this.row};
         this.moveNext = this.moveNext.bind(this);
         this.moveBack = this.moveBack.bind(this);
-        console.log('PAGE:', this.state)
+        // console.log('PAGE:', this.state)
     }
 
     render() {
@@ -27,9 +27,9 @@ class Page extends React.Component {
                 <Form row={this.state.row} index={this.state.index}/>
                 <br/>
                 <center>
-                    <button onClick={this.moveBack}>---</button>
+                    <button onClick={this.moveBack}> - - -</button>
                     <Index index={this.state.index} row={this.state.row}/>
-                    <button onClick={this.moveNext}>+++</button>
+                    <button onClick={this.moveNext}> + + +</button>
                 </center>
             </div>
         );
