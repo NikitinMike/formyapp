@@ -17,11 +17,11 @@ class Form extends React.Component {
     }
 
     dataChange(event) {
-        console.log(event.target.name, ':', event.target.value)
+        // console.log(event.target.name, ':', event.target.value)
         this.row = this.props.row
         this.row[event.target.name] = event.target.value
         this.setState({row: this.row})
-        console.log('Form state:',this.state.row)
+        // console.log('Form state:',this.state.row)
     }
 
     inputColumn(col) {
