@@ -6,12 +6,12 @@ class Data extends React.Component {
     col = null
     dataChange = null
 
-    async handleChange(event) {
+    handleChange(event) {
         // console.log(event.target.name, ':', event.target.value)
         // this.state.row[this.state.col] = event.target.value
         // await this.setState({val: event.target.value,row: this.state.row})
-        await this.setState({val: event.target.value})
-        // console.log(this.state)
+        this.setState({val: event.target.value})
+        console.log('Data:',this.state)
         this.dataChange(event)
     }
 
