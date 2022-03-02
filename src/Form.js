@@ -17,25 +17,26 @@ class Form extends React.Component {
     }
 
     dataChange(event) {
-        // console.log(event.target.name, ':', event.target.value)
-        // console.log(this.state)
+        console.log(event.target.name, ':', event.target.value)
         this.row = this.state.row
         this.row[event.target.name] = event.target.value
         this.setState({row: this.row})
+        console.log(this.state)
     }
 
     inputColumn(col) {
         // const row = this.state.row // s[this.state.index]
-        // console.log('DATA:',col,data);
         // if(row)
+        this.row=this.props.row
+        // console.log('DATA:',this.row[col]);
         return (<Data col={col} val={this.row[col]? this.row[col]:''} dataChange={this.dataChange}/>)
     }
 
-    render() {
+    render(props) {
+        console.log('DATA props:', this.props.index);
         // console.log('DATA state:', this.state.row);
-        // console.log('DATA props:', this.props.row);
-        this.row = this.props.row // s[this.state.index]
-        // console.log('DATA row:', this.row);
+        // this.row = this.state.rows[this.props.index]
+        console.log('DATA row:', this.props.row);
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.inputColumn('id')}

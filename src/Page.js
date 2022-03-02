@@ -4,31 +4,29 @@ import Form from "./Form";
 
 class Page extends React.Component {
     index = 0;
-    row = null;
     rows = null;
 
     constructor(props) {
         super(props);
         this.rows = this.props.rows
-        this.row = this.rows[this.index]
-        this.state = {index: this.index, row: this.row};
+        this.state = {index: this.index};
         this.moveNext = this.moveNext.bind(this);
         this.moveBack = this.moveBack.bind(this);
-        // console.log('PAGE:', this.state)
+        console.log('PAGE:', this.state)
     }
 
-    render() {
-        // console.log(this.state.row)
+    render(props) {
+        // console.log(this.state)
         return (
             <div>
                 <div align='right'>
-                    <Index index={this.state.index} row={this.state.row}/>
+                    <Index index={this.state.index}/>
                 </div>
-                <Form row={this.state.row} index={this.state.index}/>
+                <Form index={this.state.index} row={this.rows[this.state.index]}/>
                 <br/>
                 <center>
                     <button onClick={this.moveBack}> - - -</button>
-                    <Index index={this.state.index} row={this.state.row}/>
+                    <Index index={this.state.index}/>
                     <button onClick={this.moveNext}> + + +</button>
                 </center>
             </div>
@@ -38,8 +36,7 @@ class Page extends React.Component {
     moveNext() {
         if (this.rows[this.index + 1]) {
             this.index = this.state.index + 1
-            this.row = this.rows[this.index]
-            this.setState({index: this.index, row: this.row})
+            this.setState({index: this.index})
             // console.log(this.state)
         }
     }
@@ -47,8 +44,7 @@ class Page extends React.Component {
     moveBack() {
         if (this.rows[this.index - 1]) {
             this.index = this.state.index - 1
-            this.row = this.rows[this.index]
-            this.setState({index: this.index, row: this.row})
+            this.setState({index: this.index})
             // console.log(this.state)
         }
     }
@@ -56,8 +52,13 @@ class Page extends React.Component {
 }
 
 class Index extends React.Component {
-    render() {
-        // console.log(this.props.row)
+    constructor(props) {
+        super(props);
+        this.state = {index: this.props.index};
+    }
+
+    render(props) {
+        // console.log(this.state)
         return (<label> - {this.props.index} - </label>)
     }
 }
