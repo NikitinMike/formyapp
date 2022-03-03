@@ -12,7 +12,9 @@ class Page extends React.Component {
         this.state = {index: this.index};
         this.moveNext = this.moveNext.bind(this);
         this.moveBack = this.moveBack.bind(this);
-        console.log('PAGE:', this.state)
+        this.newData = this.newData.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
+        // console.log('PAGE:', this.state)
     }
 
     render(props) {
@@ -26,12 +28,13 @@ class Page extends React.Component {
                 <br/>
                 <center>
                     {/*<button onClick={this.moveBack}></button>*/}
-                    <img src="/img/left.png" alt="back" onClick={this.moveBack} />
+                    <img src="/img/left.png" alt="back" onClick={this.moveBack}/>
                     {/*<Index index={this.state.index}/>*/}
-                    <img src="/img/new.png" alt="new" onClick={this.new} />
+                    <img src="/img/new.png" alt="new" onClick={this.newData}/>
+                    <img src="/img/del.png" alt="new" onClick={this.deleteRow}/>
                     {/*<button onClick={this.new}> NEW </button>*/}
                     {/*<button onClick={this.moveNext}></button>*/}
-                    <img src="/img/right.png" alt="next" onClick={this.moveNext} />
+                    <img src="/img/right.png" alt="next" onClick={this.moveNext}/>
                 </center>
             </div>
         );
@@ -53,8 +56,34 @@ class Page extends React.Component {
         }
     }
 
-    new() {
+    deleteRow() {
+        const row = this.rows[this.index]['id']
+        console.log(row)
+        fetch('http://localhost:3000/contacts/' + row, {method: 'DELETE'})
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+        window.location.reload();
+    }
+
+    newData() {
         console.log("NEW")
+        const data = this.rows[this.index]
+        fetch('http://localhost:3000/contacts/',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(res => {
+                console.log(res)
+            })
+            .catch(e => console.log(e))
+        window.location.reload();
     }
 }
 
