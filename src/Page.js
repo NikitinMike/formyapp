@@ -25,9 +25,13 @@ class Page extends React.Component {
                 <Form index={this.state.index} row={this.rows[this.state.index]}/>
                 <br/>
                 <center>
-                    <button onClick={this.moveBack}> - - -</button>
-                    <Index index={this.state.index}/>
-                    <button onClick={this.moveNext}> + + +</button>
+                    {/*<button onClick={this.moveBack}></button>*/}
+                    <img src="/img/left.png" alt="back" onClick={this.moveBack} />
+                    {/*<Index index={this.state.index}/>*/}
+                    <img src="/img/new.png" alt="new" onClick={this.new} />
+                    {/*<button onClick={this.new}> NEW </button>*/}
+                    {/*<button onClick={this.moveNext}></button>*/}
+                    <img src="/img/right.png" alt="next" onClick={this.moveNext} />
                 </center>
             </div>
         );
@@ -49,6 +53,9 @@ class Page extends React.Component {
         }
     }
 
+    new() {
+        console.log("NEW")
+    }
 }
 
 class Index extends React.Component {
