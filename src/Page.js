@@ -9,12 +9,13 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.rows = this.props.rows
+        if (this.rows.length > 0) this.index = this.rows.length - 1
         this.state = {index: this.index};
         this.moveNext = this.moveNext.bind(this);
         this.moveBack = this.moveBack.bind(this);
         this.newData = this.newData.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
-        // console.log('PAGE:', this.state)
+        console.log('PAGE:', this.state, this.rows.length)
     }
 
     render(props) {
@@ -66,22 +67,19 @@ class Page extends React.Component {
         window.location.reload();
     }
 
-    newData() {
-        console.log("NEW")
+    async newData() {
+        // console.log("NEW")
         const data = this.rows[this.index]
-        fetch('http://localhost:3000/contacts/',
-            {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
+        await fetch('http://localhost:3000/contacts/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
             .then(response => response.json())
-            .then(res => {
-                console.log(res)
-            })
+            .then(res => console.log(res))
             .catch(e => console.log(e))
         window.location.reload();
     }
