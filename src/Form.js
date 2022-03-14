@@ -13,6 +13,7 @@ class Form extends React.Component {
         this.state = {row: this.row, index: this.props.index};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dataChange = this.dataChange.bind(this);
+        this.clearData = this.clearData.bind(this);
         // console.log('FORM DATA state:', this.state);
     }
 
@@ -32,6 +33,16 @@ class Form extends React.Component {
         return (<Data col={col} val={this.row[col]? this.row[col]:''} dataChange={this.dataChange}/>)
     }
 
+    clearData(){
+        this.row['firstName']='';
+        this.row['lastName']='';
+        this.row['email']='';
+        this.row['phone']='';
+        this.row['city']='';
+        this.row['country']='';
+        this.setState({row: this.row})
+    }
+
     render(props) {
         // console.log('DATA props:', this.props);
         // console.log('DATA state:', this.state.row);
@@ -49,6 +60,7 @@ class Form extends React.Component {
                 {this.inputColumn('country')}
                 <br/>
                 <center>
+                    <button onClick={this.clearData}> CLEAR </button>
                     <input type="submit" value="Отправить"/>
                 </center>
             </form>

@@ -27,18 +27,24 @@ class Page extends React.Component {
                 </div>
                 <Form index={this.state.index} row={this.rows[this.state.index]}/>
                 <br/>
-                <center>
-                    {/*<button onClick={this.moveBack}></button>*/}
-                    <img src="/img/left.png" alt="back" onClick={this.moveBack}/>
-                    {/*<Index index={this.state.index}/>*/}
-                    <img src="/img/new.png" alt="new" onClick={this.newData}/>
-                    <img src="/img/del.png" alt="new" onClick={this.deleteRow}/>
-                    {/*<button onClick={this.new}> NEW </button>*/}
-                    {/*<button onClick={this.moveNext}></button>*/}
-                    <img src="/img/right.png" alt="next" onClick={this.moveNext}/>
-                </center>
+                {this.buttons()}
             </div>
         );
+    }
+
+    buttons(){
+        return (
+            <center>
+                {/*<button onClick={this.moveBack}></button>*/}
+                <img src="/img/left.png" alt="back" onClick={this.moveBack}/>
+                {/*<Index index={this.state.index}/>*/}
+                <img src="/img/new.png" alt="new" onClick={this.newData}/>
+                {/*<button onClick={this.new}> NEW </button>*/}
+                <img src="/img/del.png" alt="new" onClick={this.deleteRow}/>
+                {/*<button onClick={this.moveNext}></button>*/}
+                <img src="/img/right.png" alt="next" onClick={this.moveNext}/>
+            </center>
+        )
     }
 
     moveNext() {
