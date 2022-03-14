@@ -4,6 +4,7 @@ import Data from "./Data";
 
 class Form extends React.Component {
 
+    fields = ['firstName','lastName','email','phone','city','country']
     row = null
 
     constructor(props) {
@@ -34,12 +35,7 @@ class Form extends React.Component {
     }
 
     clearData(){
-        this.row['firstName']='';
-        this.row['lastName']='';
-        this.row['email']='';
-        this.row['phone']='';
-        this.row['city']='';
-        this.row['country']='';
+        this.fields.forEach(field => this.row[field]='')
         this.setState({row: this.row})
     }
 
@@ -51,16 +47,18 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 {this.inputColumn('id')}
                 {/*<div align='right'><label> {this.row.id} </label><br/></div>*/}
-                {this.inputColumn('firstName')}
                 {/*<div align='right'><label> {(this.row)['firstName']} </label><br/></div>*/}
-                {this.inputColumn('lastName')}
-                {this.inputColumn('email')}
-                {this.inputColumn('phone')}
-                {this.inputColumn('city',)}
-                {this.inputColumn('country')}
+                {/*{this.fields.forEach(field => this.inputColumn(field))}*/}
+                {this.inputColumn(this.fields[0])}
+                {this.inputColumn(this.fields[1])}
+                {this.inputColumn(this.fields[2])}
+                {this.inputColumn(this.fields[3])}
+                {this.inputColumn(this.fields[4])}
+                {this.inputColumn(this.fields[5])}
                 <br/>
                 <center>
-                    <button onClick={this.clearData}> CLEAR </button>
+                    <button onClick={this.clearData}> Очистить </button>
+                    <span> </span>
                     <input type="submit" value="Отправить"/>
                 </center>
             </form>
