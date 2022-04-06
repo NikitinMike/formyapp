@@ -55,10 +55,9 @@ class Page extends React.Component {
     }
   }
 
-  deleteRow() {
-    const row = this.rows[this.index]['id']
-    console.log(row)
-    fetch('http://localhost:3000/contacts/' + row, {method: 'DELETE'})
+  async deleteRow() {
+    const id = this.rows[this.index]['id']
+    await fetch('http://localhost:3000/contacts/' + id, {method: 'DELETE'})
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(e => console.log(e))
