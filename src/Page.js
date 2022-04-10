@@ -17,7 +17,7 @@ class Page extends React.Component {
     this.deleteRow = this.deleteRow.bind(this);
   }
 
-  render(props) {
+  render() {
     return (
       <div>
         <div align='right'>
@@ -31,6 +31,7 @@ class Page extends React.Component {
   }
 
   buttons() {
+    // noinspection HtmlUnknownTarget
     return (
       <center>
         <img src="/img/left.png" alt="back" onClick={this.moveBack}/>
@@ -87,7 +88,7 @@ class Index extends React.Component {
     this.state = {index: this.props.index};
   }
 
-  render(props) {
+  render() {
     return (<label> - {this.props.index} - </label>)
   }
 }

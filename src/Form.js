@@ -32,7 +32,7 @@ class Form extends React.Component {
     this.setState({row: this.row})
   }
 
-  render(props) {
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         {this.inputColumn('id')}

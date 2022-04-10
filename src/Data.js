@@ -6,6 +6,7 @@ class Data extends React.Component {
   col = null
   dataChange = null
 
+  // noinspection JSValidateTypes
   handleChange(event) {
     this.setState({val: event.target.value})
     this.dataChange(event)
@@ -19,7 +20,7 @@ class Data extends React.Component {
     this.dataChange = this.props.dataChange
   }
 
-  render(props) {
+  render() {
     const col = this.col
     return (
       <label htmlFor={col}>{col}&nbsp;&nbsp;
