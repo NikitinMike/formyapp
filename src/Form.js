@@ -1,10 +1,10 @@
 import './App.css';
 import React from "react";
 import Data from "./Data";
+import Fields from './Fields';
 
 class Form extends React.Component {
 
-  fields = ['firstName', 'lastName', 'email', 'phone', 'city', 'country']
   row = null
 
   constructor(props) {
@@ -28,7 +28,7 @@ class Form extends React.Component {
   }
 
   clearData() {
-    this.fields.forEach(field => this.row[field] = '')
+    Fields.forEach(field => this.row[field] = '')
     this.setState({row: this.row})
   }
 
@@ -36,12 +36,7 @@ class Form extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         {this.inputColumn('id')}
-        {this.inputColumn(this.fields[0])}
-        {this.inputColumn(this.fields[1])}
-        {this.inputColumn(this.fields[2])}
-        {this.inputColumn(this.fields[3])}
-        {this.inputColumn(this.fields[4])}
-        {this.inputColumn(this.fields[5])}
+        {Fields.map(field => this.inputColumn(field))}
         <br/>
         <center>
           <button onClick={this.clearData}> Очистить</button>
